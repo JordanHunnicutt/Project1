@@ -1,0 +1,6 @@
+2020-10-27 20:41:48.117 [main] INFO  com.web.repository.UserDao - Failed to find user by username and passwordjava.sql.SQLException: The url cannot be null
+2020-10-27 20:41:48.117 [main] INFO  com.web.service.UserService - No user found in login service. java.lang.NullPointerException
+2020-10-27 21:32:19.623 [main] INFO  com.web.repository.UserDao - Failed to find user by username and passwordjava.sql.SQLException: The url cannot be null
+2020-10-27 21:32:19.623 [main] INFO  com.web.service.UserService - No user found in login service. java.lang.NullPointerException
+2020-10-27 21:34:51.653 [main] INFO  com.web.repository.UserDao - Failed to find user by username and passwordjava.sql.SQLException: The url cannot be null
+2020-10-27 21:34:51.653 [main] INFO  com.web.service.UserService - No user found in login service. java.lang.NullPointerException
