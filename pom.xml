@@ -17,7 +17,6 @@
 		<groupId>org.postgresql</groupId>
 		<artifactId>postgresql</artifactId>
 		<version>42.2.17</version>
-		<scope>provided</scope>
 	</dependency> 
   
   	<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
@@ -25,13 +24,12 @@
     	<groupId>org.apache.logging.log4j</groupId>
     	<artifactId>log4j-core</artifactId>
     	<version>2.13.3</version>
-    	<scope>provided</scope>
 	</dependency>
+	
 	<dependency>
     	<groupId>org.apache.logging.log4j</groupId>
     	<artifactId>log4j-api</artifactId>
     	<version>2.13.3</version>
-    	<scope>provided</scope>
   </dependency>
   
     <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -56,7 +54,6 @@
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
     	<version>2.11.2</version>
-    	<scope>provided</scope>
 	</dependency>
   
    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->

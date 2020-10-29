@@ -12,7 +12,7 @@ import com.web.service.UserService;
 public class UserController {
 
 	private static final UserService us = new UserService();
-	private static final Logger logger = LogManager.getLogger(UserService.class);
+	private static final Logger logger = LogManager.getLogger(UserController.class);
 	
 	//return the url to send to, also add user to session
 	//need to make a test for this
