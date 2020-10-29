@@ -10,11 +10,11 @@ public class RequestForwarder {
 	public String traffic(HttpServletRequest req, HttpServletResponse resp){
 		switch(req.getRequestURI()) {
 		case "/Project1-1.0.0/html/home.page":
+			//drop -1.0.0 for local host
 			System.out.println(req.getParameter("pwText"));
 			return new UserController().loginUserController(req.getParameter("userText"), req.getParameter("pwText"), req);
 		default:
-			return "html/index.html";
-			//drop everything before index.html for localhost
+			return "index.html";
 		}
 	}
 	
