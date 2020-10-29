@@ -13,7 +13,7 @@ public class RequestForwarder {
 			System.out.println(req.getParameter("pwText"));
 			return new UserController().loginUserController(req.getParameter("userText"), req.getParameter("pwText"), req);
 		default:
-			return "/Project1-1.0.0/html/index.html";
+			return "html/index.html";
 			//drop everything before index.html for localhost
 		}
 	}

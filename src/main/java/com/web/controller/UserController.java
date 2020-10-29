@@ -26,16 +26,16 @@ public class UserController {
 			new SessionController().setSessionUser(req, u);
 			
 			if(u.getRoleId()==1) {
-				return "/Project1-1.0.0/html/empHomePage.html";
+				return "html/empHomePage.html";
 			} else if(u.getRoleId()==2) {
-				return "/Project1-1.0.0/html/fmHomePage.html";
+				return "html/fmHomePage.html";
 			} else {
-				return "/Project1-1.0.0/html/index.html";
+				return "html/index.html";
 			}
 			
 		} catch (NullPointerException e) {
 			logger.info("Controller failed to log in, no user found" + e);
-			return "/Project1-1.0.0/html/index.html";
+			return "html/index.html";
 			//drop everything before index.html for localhost
 		}
 		
