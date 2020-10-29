@@ -11,13 +11,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.web.config.ConnectionInterface;
-import com.web.config.EnvironmentConnUtil;
+import com.web.config.PTConnUtil;
 import com.web.models.User;
 import com.web.models.UserRole;
 
 public class UserDao implements DaoContract<User, Integer>{
 
-	private ConnectionInterface ci = new EnvironmentConnUtil().getInstance();
+	private ConnectionInterface ci = new PTConnUtil().getInstance();
 	private static final Logger logger = LogManager.getLogger(UserDao.class);
 	
 	@Override

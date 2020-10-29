@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project1</a> &gt; <a href="index.source.html" class="el_package">com.web.repository</a> &gt; <span class="el_source">UserDao.java</span></div><h1>UserDao.java</h1><pre class="source lang-java linenums">package com.web.repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.web.config.ConnectionInterface;
+import com.web.config.PTConnUtil;
+import com.web.models.User;
+import com.web.models.UserRole;
+
+<span class="fc" id="L18">public class UserDao implements DaoContract&lt;User, Integer&gt;{</span>
+
+<span class="fc" id="L20">	private ConnectionInterface ci = new PTConnUtil().getInstance();</span>
+<span class="fc" id="L21">	private static final Logger logger = LogManager.getLogger(UserDao.class);</span>
+	
+	@Override
+	public List&lt;User&gt; findAll() {
+<span class="nc" id="L25">		List&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L26">		try (Connection conn = ci.getConnection()){</span>
+<span class="nc" id="L27">			String sql = &quot;select * from ers_users where ers_users_id &gt; ?&quot;;</span>
+<span class="nc" id="L28">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L29">			ps.setInt(1, 0);</span>
+<span class="nc" id="L30">			ResultSet rs = ps.executeQuery();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">			while(rs.next()) {</span>
+<span class="nc" id="L32">				users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7)));</span>
+			}
+<span class="nc" id="L34">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L36">			logger.info(&quot;Failed to find all users&quot; +e);</span>
+<span class="nc" id="L37">			return users;</span>
+		}
+<span class="nc" id="L39">		logger.info(&quot;Selected all users&quot;);</span>
+<span class="nc" id="L40">		return users;</span>
+	}
+
+	@Override
+	public User findById(Integer i) {
+<span class="nc" id="L45">		User u = null;</span>
+<span class="nc" id="L46">		try (Connection conn = ci.getConnection()){</span>
+<span class="nc" id="L47">			String sql = &quot;select * from ers_users where ers_users_id = ?&quot;;</span>
+<span class="nc" id="L48">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L49">			ps.setInt(1, i);</span>
+<span class="nc" id="L50">			ResultSet rs = ps.executeQuery();</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">			while(rs.next()) {</span>
+<span class="nc" id="L52">				u = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));</span>
+			}
+<span class="nc" id="L54">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L56">			logger.info(&quot;Failed to find user by Id&quot; +e);</span>
+<span class="nc" id="L57">			return u;</span>
+		}
+<span class="nc" id="L59">		logger.info(&quot;Selected one user by Id&quot;);</span>
+<span class="nc" id="L60">		return u;</span>
+	}
+
+	@Override
+	public User findByName(String name) {
+<span class="nc" id="L65">		User u = null;</span>
+<span class="nc" id="L66">		try (Connection conn = ci.getConnection()){</span>
+<span class="nc" id="L67">			String sql = &quot;select * from ers_users where ers_username = ?&quot;;</span>
+<span class="nc" id="L68">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L69">			ps.setString(1, name);</span>
+<span class="nc" id="L70">			ResultSet rs = ps.executeQuery();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">			while(rs.next()) {</span>
+<span class="nc" id="L72">				u = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));</span>
+			}
+<span class="nc" id="L74">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L76">			logger.info(&quot;Failed to find user by username&quot; +e);</span>
+<span class="nc" id="L77">			return u;</span>
+		}
+<span class="nc" id="L79">		logger.info(&quot;Selected one user by username&quot;);</span>
+<span class="nc" id="L80">		return u;</span>
+	}
+
+	public User findByNameAndPass(String name, String pass) {
+<span class="fc" id="L84">		User u = null;</span>
+<span class="fc" id="L85">		try (Connection conn = ci.getConnection()){</span>
+<span class="fc" id="L86">			String sql = &quot;select * from ers_users where ers_username = ? and ers_password = md5(?||?||?)&quot;;</span>
+<span class="fc" id="L87">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="fc" id="L88">			ps.setString(1, name);</span>
+<span class="fc" id="L89">			ps.setString(2, name);</span>
+<span class="fc" id="L90">			ps.setString(3, pass);</span>
+<span class="fc" id="L91">			ps.setString(4, &quot;superSuddenDeath&quot;);</span>
+<span class="fc" id="L92">			ResultSet rs = ps.executeQuery();</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L94">				u = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));</span>
+			}
+<span class="nc" id="L96">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L98">			logger.info(&quot;Failed to find user by username and password&quot; +e);</span>
+<span class="nc" id="L99">			return u;</span>
+		}
+<span class="fc" id="L101">		logger.info(&quot;Selected one user by username and password&quot;);</span>
+<span class="fc" id="L102">		return u;</span>
+	}
+	
+	@Override
+	public int create(User t) {
+<span class="nc" id="L107">		int result = 0;</span>
+<span class="nc" id="L108">		try (Connection conn = ci.getConnection()){</span>
+<span class="nc" id="L109">			String sql = &quot;insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) values (?,?,?,?,?,?)&quot;;</span>
+<span class="nc" id="L110">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L111">			ps.setString(1, t.getUsername());</span>
+<span class="nc" id="L112">			ps.setString(2, t.getPassword());</span>
+<span class="nc" id="L113">			ps.setString(3, t.getFirstName());</span>
+<span class="nc" id="L114">			ps.setString(4, t.getLastName());</span>
+<span class="nc" id="L115">			ps.setString(5, t.getEmail());</span>
+<span class="nc" id="L116">			ps.setInt(6, t.getRoleId());</span>
+<span class="nc" id="L117">			result = ps.executeUpdate();</span>
+<span class="nc" id="L118">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L120">			logger.info(&quot;Failed to add a new user&quot;+e);</span>
+<span class="nc" id="L121">			return result;</span>
+		}
+<span class="nc" id="L123">		logger.info(&quot;Created a new user&quot;);</span>
+<span class="nc" id="L124">		return result;</span>
+	}
+
+	@Override
+	public int update(User t) {
+<span class="nc" id="L129">		int result = 0;</span>
+<span class="nc" id="L130">		try (Connection conn = ci.getConnection()){</span>
+<span class="nc" id="L131">			String sql = &quot;update ers_users set (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) = (?,?,?,?,?,?) where ers_users_id = ?&quot;;</span>
+<span class="nc" id="L132">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L133">			ps.setString(1, t.getUsername());</span>
+<span class="nc" id="L134">			ps.setString(2, t.getPassword());</span>
+<span class="nc" id="L135">			ps.setString(3, t.getFirstName());</span>
+<span class="nc" id="L136">			ps.setString(4, t.getLastName());</span>
+<span class="nc" id="L137">			ps.setString(5, t.getEmail());</span>
+<span class="nc" id="L138">			ps.setInt(6, t.getRoleId());</span>
+<span class="nc" id="L139">			ps.setInt(7, t.getUserId());</span>
+<span class="nc" id="L140">			result = ps.executeUpdate();</span>
+<span class="nc" id="L141">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L143">			logger.info(&quot;Failed to update user&quot;+e);</span>
+<span class="nc" id="L144">			return result;</span>
+		}
+<span class="nc" id="L146">		logger.info(&quot;Updated a user&quot;);</span>
+<span class="nc" id="L147">		return result;</span>
+	}
+
+	@Override
+	public int delete(Integer i) {
+<span class="nc" id="L152">		int result = 0;</span>
+<span class="nc" id="L153">		try (Connection conn = ci.getConnection()){</span>
+<span class="nc" id="L154">			String sql = &quot;delete from ers_users where ers_users_id = ?&quot;;</span>
+<span class="nc" id="L155">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L156">			ps.setInt(1, i);</span>
+<span class="nc" id="L157">			result = ps.executeUpdate();</span>
+<span class="nc" id="L158">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L160">			logger.info(&quot;Failed to delete user&quot; +e);</span>
+<span class="nc" id="L161">			return result;</span>
+		}
+<span class="nc" id="L163">		logger.info(&quot;Deleted one user&quot;);</span>
+<span class="nc" id="L164">		return result;</span>
+	}
+
+	public List&lt;UserRole&gt; findAllRoles(){
+<span class="nc" id="L168">		List&lt;UserRole&gt; roles = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L169">		try (Connection conn = ci.getConnection()){</span>
+<span class="nc" id="L170">			String sql = &quot;select * from ers_user_roles where ers_user_role_id &gt; ?&quot;;</span>
+<span class="nc" id="L171">			PreparedStatement ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L172">			ps.setInt(1, 0);</span>
+<span class="nc" id="L173">			ResultSet rs = ps.executeQuery();</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">			while(rs.next()) {</span>
+<span class="nc" id="L175">				roles.add(new UserRole(rs.getInt(1),rs.getString(2)));</span>
+			}
+<span class="nc" id="L177">		} catch (SQLException e) {</span>
+			//e.printStackTrace();
+<span class="nc" id="L179">			logger.info(&quot;Failed to find all roles&quot; +e);</span>
+<span class="nc" id="L180">			return roles;</span>
+		}
+<span class="nc" id="L182">		logger.info(&quot;Selected all roles&quot;);</span>
+<span class="nc" id="L183">		return roles;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project1</a> &gt; <a href="index.source.html" class="el_package">com.web.service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.web.service;
+
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.web.models.Reimbursement;
+import com.web.models.User;
+import com.web.repository.ReimbursementDao;
+import com.web.repository.UserDao;
+
+<span class="fc" id="L13">public class UserService {</span>
+
+<span class="fc" id="L15">	private static final UserDao ud = new UserDao();</span>
+<span class="fc" id="L16">	private static final ReimbursementDao rd = new ReimbursementDao();</span>
+<span class="fc" id="L17">	private static final Logger logger = LogManager.getLogger(UserService.class);</span>
+	
+	public User loginService(String name, String password) {
+<span class="fc" id="L20">		User ret = ud.findByNameAndPass(name, password);</span>
+
+		try {
+<span class="fc bfc" id="L23" title="All 2 branches covered.">			boolean b = (ret == null);	</span>
+			
+<span class="pc" id="L25">		} catch (NullPointerException e){</span>
+<span class="nc" id="L26">			logger.info(&quot;No user found in login service. &quot;+e);</span>
+		}
+		
+<span class="fc" id="L29">		return ret;</span>
+	}
+	
+	public List&lt;Reimbursement&gt; userReimbursementService(int id) {
+<span class="fc" id="L33">		List&lt;Reimbursement&gt; reimbursements = rd.findByAuthor(id);</span>
+		
+		try {
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">			boolean b = (reimbursements == null);</span>
+<span class="pc" id="L37">		} catch (NullPointerException e) {</span>
+<span class="nc" id="L38">			logger.info(&quot;No reimbursements found for that user&quot; +e);</span>
+		}
+		
+<span class="fc" id="L41">		return reimbursements;</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

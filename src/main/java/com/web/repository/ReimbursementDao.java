@@ -12,14 +12,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.web.config.ConnectionInterface;
-import com.web.config.EnvironmentConnUtil;
+import com.web.config.PTConnUtil;
 import com.web.models.Reimbursement;
 import com.web.models.ReimbursementStatus;
 import com.web.models.ReimbursementType;
 
 public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 
-	private ConnectionInterface ci = new EnvironmentConnUtil().getInstance();
+	private ConnectionInterface ci = new PTConnUtil().getInstance();
 	private static final Logger logger = LogManager.getLogger(ReimbursementDao.class);
 	
 	@Override

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReimbursementService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project1</a> &gt; <a href="index.source.html" class="el_package">com.web.service</a> &gt; <span class="el_source">ReimbursementService.java</span></div><h1>ReimbursementService.java</h1><pre class="source lang-java linenums">package com.web.service;
+
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.web.models.Reimbursement;
+import com.web.repository.ReimbursementDao;
+
+<span class="fc" id="L11">public class ReimbursementService {</span>
+
+<span class="fc" id="L13">	private static final ReimbursementDao rd = new ReimbursementDao();</span>
+<span class="fc" id="L14">	private static final Logger logger = LogManager.getLogger(ReimbursementService.class);</span>
+	
+	public int addReimbursementService(Reimbursement r) {
+<span class="fc" id="L17">		int added = rd.create(r);</span>
+		
+<span class="fc bfc" id="L19" title="All 2 branches covered.">		if(added == 0) {</span>
+<span class="fc" id="L20">			logger.info(&quot;No reimbursement was added&quot;);</span>
+		}
+		
+<span class="fc" id="L23">		return added;</span>
+	}
+	
+	public int editReimbursementService(Reimbursement r) {
+<span class="fc" id="L27">		int edited = rd.update(r);</span>
+		
+<span class="fc bfc" id="L29" title="All 2 branches covered.">		if(edited == 0) {</span>
+<span class="fc" id="L30">			logger.info(&quot;No reimbursement was edited&quot;);</span>
+		}
+		
+<span class="fc" id="L33">		return edited;</span>
+	}
+	
+	public List&lt;Reimbursement&gt; getAllReimbursements(){
+<span class="fc" id="L37">		List&lt;Reimbursement&gt; reimbs = rd.findAll();</span>
+		
+		try {
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">			boolean b = (reimbs == null);</span>
+<span class="pc" id="L41">		} catch (NullPointerException e) {</span>
+<span class="nc" id="L42">			logger.info(&quot;No reimbursements were found&quot;);</span>
+		}
+		
+<span class="fc" id="L45">		return reimbs;</span>
+	}
+	
+	public List&lt;Reimbursement&gt; getPendingReimbursements(){
+<span class="fc" id="L49">		List&lt;Reimbursement&gt; reimbs = rd.findByPending();</span>
+		
+		try {
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">			boolean b = (reimbs == null);</span>
+<span class="pc" id="L53">		} catch (NullPointerException e) {</span>
+<span class="nc" id="L54">			logger.info(&quot;No pending reimbursements were found&quot;);</span>
+		}
+		
+<span class="fc" id="L57">		return reimbs;</span>
+	}
+	
+	public boolean newReimbType(String type) {
+<span class="fc" id="L61">		boolean b = rd.createType(type);</span>
+		
+<span class="fc" id="L63">		return b;		</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
