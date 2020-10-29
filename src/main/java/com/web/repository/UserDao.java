@@ -31,6 +31,9 @@ public class UserDao implements DaoContract<User, Integer>{
 			while(rs.next()) {
 				users.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7)));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find all users" +e);
@@ -51,6 +54,9 @@ public class UserDao implements DaoContract<User, Integer>{
 			while(rs.next()) {
 				u = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find user by Id" +e);
@@ -71,6 +77,9 @@ public class UserDao implements DaoContract<User, Integer>{
 			while(rs.next()) {
 				u = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find user by username" +e);
@@ -93,6 +102,9 @@ public class UserDao implements DaoContract<User, Integer>{
 			while(rs.next()) {
 				u = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find user by username and password" +e);
@@ -115,6 +127,8 @@ public class UserDao implements DaoContract<User, Integer>{
 			ps.setString(5, t.getEmail());
 			ps.setInt(6, t.getRoleId());
 			result = ps.executeUpdate();
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to add a new user"+e);
@@ -138,6 +152,8 @@ public class UserDao implements DaoContract<User, Integer>{
 			ps.setInt(6, t.getRoleId());
 			ps.setInt(7, t.getUserId());
 			result = ps.executeUpdate();
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to update user"+e);
@@ -155,6 +171,8 @@ public class UserDao implements DaoContract<User, Integer>{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, i);
 			result = ps.executeUpdate();
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to delete user" +e);
@@ -174,6 +192,9 @@ public class UserDao implements DaoContract<User, Integer>{
 			while(rs.next()) {
 				roles.add(new UserRole(rs.getInt(1),rs.getString(2)));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find all roles" +e);

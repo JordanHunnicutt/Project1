@@ -33,6 +33,9 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			while(rs.next()) {
 				reimbursements.add(new Reimbursement(rs.getInt(1),rs.getDouble(2),rs.getTimestamp(3),rs.getTimestamp(4),rs.getString(5),rs.getBytes(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10)));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find all reimbursement requests" +e);
@@ -53,6 +56,9 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			while(rs.next()) {
 				r = new Reimbursement(rs.getInt(1),rs.getDouble(2),rs.getTimestamp(3),rs.getTimestamp(4),rs.getString(5),rs.getBytes(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find reimbursement request by Id" +e);
@@ -72,6 +78,9 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			while(rs.next()) {
 				reimbursements.add(new Reimbursement(rs.getInt(1),rs.getDouble(2),rs.getTimestamp(3),rs.getTimestamp(4),rs.getString(5),rs.getBytes(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10)));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			logger.info("Failed to find reimbursements by author"+e);
 			return reimbursements;
@@ -90,6 +99,9 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			while(rs.next()) {
 				reimbursements.add(new Reimbursement(rs.getInt(1),rs.getDouble(2),rs.getTimestamp(3),rs.getTimestamp(4),rs.getString(5),rs.getBytes(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10)));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			logger.info("Failed to find reimbursements by pending"+e);
 			return reimbursements;
@@ -121,6 +133,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			ps.setInt(8, t.getStatusId());
 			ps.setInt(9, t.getTypeId());
 			result = ps.executeUpdate();
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to add a new reimbursement request"+e);
@@ -147,6 +161,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			ps.setInt(9, t.getTypeId());
 			ps.setInt(10, t.getReimbursementId());
 			result = ps.executeUpdate();
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to update reimbursement request"+e);
@@ -164,6 +180,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, i);
 			result = ps.executeUpdate();
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to delete reimbursement request" +e);
@@ -183,6 +201,9 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			while(rs.next()) {
 				statuses.add(new ReimbursementStatus(rs.getInt(1),rs.getString(2)));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find all reimbursement statuses" +e);
@@ -202,6 +223,9 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			while(rs.next()) {
 				types.add(new ReimbursementType(rs.getInt(1),rs.getString(2)));
 			}
+			ps.close();
+			rs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to find all reimbursement types" +e);
@@ -217,6 +241,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			CallableStatement cs = conn.prepareCall(sql);
 			cs.setString(1, newType);
 			int i = cs.executeUpdate();
+			cs.close();
+			conn.close();
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to create a new reimbursement type"+e);
