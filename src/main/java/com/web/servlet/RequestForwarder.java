@@ -9,11 +9,12 @@ public class RequestForwarder {
 
 	public String traffic(HttpServletRequest req, HttpServletResponse resp){
 		switch(req.getRequestURI()) {
-		case "/Project1/html/home.page":
+		case "/Project1-1.0.0/html/home.page":
 			System.out.println(req.getParameter("pwText"));
 			return new UserController().loginUserController(req.getParameter("userText"), req.getParameter("pwText"), req);
 		default:
-			return "index.html";
+			return "/Project1-1.0.0/html/index.html";
+			//drop everything before index.html for localhost
 		}
 	}
 	
