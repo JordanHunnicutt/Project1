@@ -133,6 +133,8 @@ public class UserDao implements DaoContract<User, Integer>{
 			//e.printStackTrace();
 			logger.info("Failed to add a new user"+e);
 			return result;
+		} catch (NullPointerException e) {
+			return result;
 		}
 		logger.info("Created a new user");
 		return result;
@@ -158,6 +160,8 @@ public class UserDao implements DaoContract<User, Integer>{
 			//e.printStackTrace();
 			logger.info("Failed to update user"+e);
 			return result;
+		} catch (NullPointerException e) {
+			return result;
 		}
 		logger.info("Updated a user");
 		return result;
@@ -176,6 +180,8 @@ public class UserDao implements DaoContract<User, Integer>{
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to delete user" +e);
+			return result;
+		} catch (NullPointerException e) {
 			return result;
 		}
 		logger.info("Deleted one user");

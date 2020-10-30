@@ -139,6 +139,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			//e.printStackTrace();
 			logger.info("Failed to add a new reimbursement request"+e);
 			return result;
+		} catch (NullPointerException e) {
+			return result;
 		}
 		logger.info("Created a new reimbursement request");
 		return result;
@@ -167,6 +169,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 			//e.printStackTrace();
 			logger.info("Failed to update reimbursement request"+e);
 			return result;
+		} catch (NullPointerException e) {
+			return result;
 		}
 		logger.info("Updated reimbursement request");
 		return result;
@@ -185,6 +189,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			logger.info("Failed to delete reimbursement request" +e);
+			return result;
+		} catch (NullPointerException e) {
 			return result;
 		}
 		logger.info("Deleted one reimbursement request");
