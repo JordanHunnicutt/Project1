@@ -2,6 +2,7 @@ package com.web.repository;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.web.models.Reimbursement;
@@ -9,6 +10,15 @@ import com.web.models.Reimbursement;
 public class ReimbursementDaoTest {
 
 	private static final ReimbursementDao rd = new ReimbursementDao();
+	private Reimbursement r = new Reimbursement();
+	
+	@Before
+	public void setup() {
+		r.setAuthorId(2);
+		r.setResolverId(1);
+		r.setTypeId(1);
+		r.setStatusId(1);
+	}
 	
 	@Test
 	public void findAllRTest() {
@@ -52,7 +62,7 @@ public class ReimbursementDaoTest {
 	
 	@Test
 	public void createRTest() {
-		assertNotNull(rd.create(null));
+		assertNotNull(rd.create(r));
 	}
 	
 	@Test
