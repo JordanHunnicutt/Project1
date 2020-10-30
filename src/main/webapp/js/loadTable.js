@@ -93,7 +93,7 @@ function renderTable(reimbursements){
 }
 
  ajaxGetRequest(
-     "http://localhost:8081/Project1-1.0.0/table.json",renderTable,'get'
+     "http://localhost:8080/Project1/table.json",renderTable,'get'
  );
 
 // asyncFetch(

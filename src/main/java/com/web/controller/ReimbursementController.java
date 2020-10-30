@@ -122,9 +122,9 @@ public class ReimbursementController {
 		r.setAmount(Double.parseDouble(req.getParameter("amountText")));
 		r.setDescription(req.getParameter("descText"));
 		r.setResolverId(1);
-		r.setTypeId(1);
 		r.setAuthorId(sc.getSessionUser(req).getUserId());
 		r.setSubmitDate(Timestamp.valueOf(LocalDateTime.now()));
+		r.setStatusId(1);
 		
 		int added = rs.addReimbursementService(r);
 		

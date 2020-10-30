@@ -119,7 +119,7 @@ public class ReimbursementBuilt {
 		try {
 			int subDay = r.getSubmitDate().getDay();
 			int subMonth = r.getSubmitDate().getMonth();
-			int subYear = r.getSubmitDate().getYear();
+			int subYear = r.getSubmitDate().getYear() + 1900;
 			this.submitDate = subMonth+"/"+subDay+"/"+subYear;
 		} catch (NullPointerException e) {
 			this.submitDate = "None provided";

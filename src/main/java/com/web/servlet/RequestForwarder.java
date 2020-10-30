@@ -14,7 +14,7 @@ import com.web.models.Reimbursement;
 public class RequestForwarder {
 
 	private static SessionController sc = new SessionController();
-	private static final String prep = "/Project1-1.0.0/";
+	private static final String prep = "/Project1/";
 	
 	public String traffic(HttpServletRequest req, HttpServletResponse resp){
 		switch(req.getRequestURI()) {
