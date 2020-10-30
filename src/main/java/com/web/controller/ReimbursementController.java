@@ -37,9 +37,7 @@ public class ReimbursementController {
 		
 		try {
 			res.getWriter().println(new ObjectMapper().writeValueAsString(types));
-		} catch (IOException e) {
-			return false;
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			return false;
 		}
 		
@@ -163,9 +161,7 @@ public class ReimbursementController {
 		r.setSubmitDate(Timestamp.valueOf(LocalDateTime.now()));
 		r.setStatusId(1);
 		
-		int added = rs.addReimbursementService(r);
-		
-		if(added == 0) {
+		if(rs.addReimbursementService(r) == 0) {
 			logger.info("Failed to add reimbursement");
 		}
 		return true;
