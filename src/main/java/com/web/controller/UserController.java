@@ -31,7 +31,6 @@ public class UserController {
 		User u = us.loginService(name, password);
 		
 		try {
-			boolean b = u.equals(null);
 			
 			new SessionController().setSessionUser(req, u);
 			
@@ -57,7 +56,6 @@ public class UserController {
 		try {
 			res.setContentType("text/json");
 			type = sc.getSessionTable(req);
-			System.out.println(sc.getSessionUser(req));
 		} catch(NullPointerException e) {
 			type = "";
 		}
