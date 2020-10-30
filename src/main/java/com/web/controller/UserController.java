@@ -58,6 +58,7 @@ public class UserController {
 				//give all of the pending requests
 				List<Reimbursement> reimbursements = rs.getPendingReimbursements();
 				try {
+					System.out.println(reimbursements);
 					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements));
 				} catch (IOException e){
 					

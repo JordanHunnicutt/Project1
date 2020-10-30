@@ -101,6 +101,6 @@ const x = fetch('http://18.216.107.51:8081/Project1-1.0.0/table.json', {
      } 
   })
   .then((r)=>r.json())
-  .then((reimbursements) => renderTable(reimbursements));
+  .then((reimbursements) => console.log(reimbursements),renderTable(reimbursements));
 
 console.log("aaa"+reimbursements.data);
