@@ -72,7 +72,7 @@ public class ReimbursementController {
 		try {
 			i = Integer.parseInt(req.getParameter("reimbSel"));
 		} catch (NullPointerException e) {
-			//return false;
+			return false;
 		}		
 		
 		Reimbursement r = rs.getReimbursementIdService(i);
