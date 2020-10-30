@@ -72,7 +72,7 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.1</version>
 				<configuration>
-				<exclude>com.web.models</exclude>
+				<exclude>com.web.models.*</exclude>
 				</configuration>
 				<executions>
 					<execution>
