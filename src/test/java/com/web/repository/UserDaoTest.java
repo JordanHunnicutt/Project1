@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+import com.web.models.User;
+
 public class UserDaoTest {
 
 	private static final UserDao ud = new UserDao();
@@ -40,7 +42,9 @@ public class UserDaoTest {
 	
 	@Test
 	public void updateUserTest() {
-		assertNotNull(ud.update(null));
+		User u = ud.findById(2);
+		
+		assertNotNull(ud.update(u));
 	}
 	
 	@Test

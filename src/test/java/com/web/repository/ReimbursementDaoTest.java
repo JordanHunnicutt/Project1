@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+import com.web.models.Reimbursement;
+
 public class ReimbursementDaoTest {
 
 	private static final ReimbursementDao rd = new ReimbursementDao();
@@ -55,7 +57,9 @@ public class ReimbursementDaoTest {
 	
 	@Test
 	public void updateRTest() {
-		assertNotNull(rd.update(null));
+		Reimbursement r = rd.findById(5);
+		
+		assertNotNull(rd.update(r));
 	}
 	
 	@Test
