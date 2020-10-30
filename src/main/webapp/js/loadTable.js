@@ -92,7 +92,7 @@ function renderTable(reimbursements){
 //     "http://18.216.107.51:8081/Project1-1.0.0/html/table.json",renderTable
 // )
 
-const x = fetch('http://18.216.107.51:8081/Project1-1.0.0/html/table.json', {
+const x = fetch('http://18.216.107.51:8081/Project1-1.0.0/table.json', {
       //body: JSON.parse(),
       method: 'post',
      mode: "no-cors",
