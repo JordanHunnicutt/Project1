@@ -1,6 +1,7 @@
 package com.web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.config.SessionController;
 import com.web.models.Reimbursement;
+import com.web.models.ReimbursementBuilt;
 import com.web.models.User;
 import com.web.service.ReimbursementService;
 import com.web.service.UserService;
@@ -52,14 +54,20 @@ public class UserController {
 	public void userReimbursementController(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("text/json");
 		String type = sc.getSessionTable(req);
+		System.out.println(sc.getSessionUser(req));
+		
 		
 		switch(type) {
 			case "allPending":
 				//give all of the pending requests
 				List<Reimbursement> reimbursements = rs.getPendingReimbursements();
+				List<ReimbursementBuilt> reimbursementsBuilt = new ArrayList<>();
+				for(Reimbursement r : reimbursements) {
+					reimbursementsBuilt.add(new ReimbursementBuilt(r));
+				}				
 				try {
 					System.out.println(reimbursements);
-					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements));
+					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursementsBuilt));
 				} catch (IOException e){
 					
 				}
@@ -68,9 +76,12 @@ public class UserController {
 				//give a single user's requests
 				User u = sc.getSessionUser(req);
 				List<Reimbursement> reimbursements2 = us.userReimbursementService(u.getUserId());
-				
+				List<ReimbursementBuilt> reimbursementsBuilt2 = new ArrayList<>();
+				for(Reimbursement r : reimbursements2) {
+					reimbursementsBuilt2.add(new ReimbursementBuilt(r));
+				}
 				try {
-					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements2));
+					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursementsBuilt2));
 				} catch (IOException e){
 					
 				}
@@ -78,8 +89,12 @@ public class UserController {
 			case "every":
 				//give all of the requests
 				List<Reimbursement> reimbursements3 = rs.getAllReimbursements();
+				List<ReimbursementBuilt> reimbursementsBuilt3 = new ArrayList<>();
+				for(Reimbursement r : reimbursements3) {
+					reimbursementsBuilt3.add(new ReimbursementBuilt(r));
+				}				
 				try {
-					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements3));
+					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursementsBuilt3));
 				} catch (IOException e){
 					
 				}
@@ -101,6 +116,17 @@ public class UserController {
 		
 		
 
+	}
+	
+	public String backToHome(HttpServletRequest req) {
+		User u = sc.getSessionUser(req);
+		if(u.getRoleId()==1) {
+			return "empHomePage.html";
+		} else if (u.getRoleId()==2) {
+			return "fmHomePage.html";
+		} else {
+			return "index.html";
+		}
 	}
 	
 }

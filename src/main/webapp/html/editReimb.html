@@ -23,7 +23,7 @@
             <br>
             <h3 class="text-center">Edit Reimbursement</h3>
         </div>
-        <form action="add.json" method="post">
+        <form action="update.page" method="post">
             <div class="row">
                 <div class="col-4">
 
@@ -33,22 +33,20 @@
                     <div class="form-group text-left">
                         <label for="reimbType">Type: </label>
                         <input class="form-control" type="text" name="reimbType" id="reimbType" list="rTypes"/>
-                            <datalist id="rTypes">
-                                <option>placeholder</option>                              
+                            <datalist id="rTypes">                             
                             </datalist>
                     </div>
                     <div class="form-group text-left">
                         <label for="amountText">Amount: </label>
-                        <input class="form-control" type="number" id="amountText" name="amountText">
+                        <input class="form-control" type="number" step="0.01" id="amountText" name="amountText">
                     </div>
                     <div class="form-group text-left">
                         <label for="descText">Description: </label>
                         <input class="form-control" type="textArea" id="descText" name="descText">
                     </div>
                     <div class="form-group text-left">
-                        <label for="status">Status: </label>
-                        <select class="form-control" name="status" id="status">
-                            <option>placeholder</option>
+                        <label for="rStatus">Status: </label>
+                        <select class="form-control" name="rStatus" id="rStatus">
                         </select>
                     </div>
                     <br>
@@ -65,6 +63,69 @@
     <!-- Bootstrap scripts, don't delete -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        //script wasn't loading in head for some reason, so it's here now.
+        function ajaxGetRequest(url, expression, method = "get"){ //having method makes this more modular
+    //step 1
+    const xhr = new XMLHttpRequest(); //this object has to ability to send requests and get responses
+
+    //step 2
+    xhr.onreadystatechange = () => { //event handler for when the ready state changes
+        if(xhr.readyState === 4 && xhr.status === 200){
+            /*
+                status = status code (100 info, 200 ok, 300 redirect, 400 client error, 500 server error)
+
+                the ready state is like the state of the request, the request has a numerical representation
+                ready state
+                    0 = request has not been initialized
+                    1 = request has been initialized (the connection has been established)
+                    2 = request has been received
+                    3 = server is processing the request
+                    4 = request has finished processing and the response is ready
+            */
+
+            const jsonResponse = JSON.parse(xhr.responseText); //Two main functions, parse and stringify
+                                                                //Get from a server, parse
+                                                                //Send to a server, stringify
+            expression(jsonResponse);  
+        }
+    };
+
+    //step 3
+    xhr.open(method, url); //opens the connection
+
+    //you can do different things between open and send, such as attaching headers
+
+    //step 4
+    xhr.send(); //sends the request
+}
+
+function renderTypes(types){
+    for (const type of types){
+        console.log(types);
+        const typeOPT = document.createElement('option');        
+        typeOPT.value = type.type;
+        document.getElementById('rTypes').append(typeOPT);
+    }
+}
+
+function renderStatuses(statuses){
+    for (const status of statuses){
+        console.log(status);
+        const statusOPT = document.createElement('option');
+        statusOPT.innerText = status.status;
+        document.getElementById('rStatus').append(statusOPT);
+    }
+}
+
+ ajaxGetRequest(
+     "http://localhost:8081/Project1-1.0.0/type.json",renderTypes,'get'
+ );
+
+  ajaxGetRequest(
+     "http://localhost:8081/Project1-1.0.0/status.json",renderStatuses,'get'
+  )
+    </script>
 </footer>
 </body>
 </html>

@@ -28,23 +28,25 @@
             <p>Please select an option:</p>
         </div>
         <div class="card-deck animate__animated animate__fadeInUp">
-            <form action="table.page" method="post" id="tableForm">
-            <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" name="tableType" value="allPending" onclick="document.getElementById('tableForm').submit()">
+            <form action="table.page" method="get" id="tableForm">
+            <div class="card">
                 <img src="../images/plusInCircle.png" class="card-img-top" style="max-height:167px; max-width:167px; align-self:center;" alt="A new item icon">
                 <div class="card-body">
                     <h5 class="card-title">Pending Requests</h5>
                     <p class="card-text">View all of the pending reimbursement requests here.</p>
+                    <button type="submit" value="allPending" name="tableType" >Pending</button>
                 </div>
-            </a></div>
+            </div>
             </form>
             <form action="table.page" method="post" id="tableForm2">
-            <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" name="tableType" value="every" onclick="document.getElementById('tableForm2').submit()">
+            <div class="card">
                 <img src="../images/1-filing-cabinet-drawer-open-tax-allan-swart.jpg" class="card-img-top" style="max-height:167px; width:auto;" alt="File cabinet image">
                 <div class="card-body">
                     <h5 class="card-title">All Requests</h5>
                     <p class="card-text">View all of the reimbursement requests here.</p>
+                    <button type="submit" value="every" name="tableType" >All</button>
                 </div>
-            </a></div>
+            </div>
             </form>
             <!--
             <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" href="empNotifications.html">

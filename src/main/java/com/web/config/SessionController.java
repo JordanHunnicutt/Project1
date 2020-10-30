@@ -3,6 +3,7 @@ package com.web.config;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.web.models.Reimbursement;
 import com.web.models.User;
 
 public class SessionController {
@@ -23,10 +24,21 @@ public class SessionController {
 	public void setSessionTable(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String tType = req.getParameter("tableType");
+		System.out.println(req.getParameter("tableType"));
 		session.setAttribute("tableType", tType);
 	}
 	
 	public String getSessionTable(HttpServletRequest req) {
 		return (String)req.getSession().getAttribute("tableType");
 	}
+	
+	public void setSessionReimbursement(HttpServletRequest req, Reimbursement r) {
+		HttpSession session = req.getSession();
+		session.setAttribute("CurrentReimbursement", r);
+	}
+	
+	public Reimbursement getSessionReimbursement(HttpServletRequest req) {
+		return (Reimbursement)req.getSession().getAttribute("CurrentReimbursement");
+	}
+	
 }

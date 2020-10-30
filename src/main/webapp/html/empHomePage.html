@@ -28,21 +28,22 @@
             <p>Please select an option:</p>
         </div>
         <div class="card-deck animate__animated animate__fadeInUp">
-            <div class="card">
+            <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" href="add.page">
                 <img src="../images/plusInCircle.png" class="card-img-top" style="max-height:167px; max-width:167px; align-self:center;" alt="A new item icon">
                 <div class="card-body">
                     <h5 class="card-title">New Request</h5>
                     <p class="card-text">Submit a new reimbursement request here.</p>
-                </div>
+                </a></div>
             </div>
             <form action="table.page" method="post" id="tableForm">
-            <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" name="tableType" value="user" onclick="document.getElementById('tableForm').submit()">
+            <div class="card">
                 <img src="../images/1-filing-cabinet-drawer-open-tax-allan-swart.jpg" class="card-img-top" style="max-height:167px; width:auto;" alt="File cabinet image">
                 <div class="card-body">
                     <h5 class="card-title">Past/Pending Requests</h5>
                     <p class="card-text">View all of the reimbursement requests you have submmitted here.</p>
+                    <button type="submit" value="user" name="tableType" >My Requests</button>
                 </div>
-            </a></div>
+            </div>
             </form>
             <!--
             <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" href="empNotifications.html">

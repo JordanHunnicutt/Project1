@@ -17,7 +17,7 @@ function ajaxGetRequest(url, expression, method = "get"){ //having method makes 
                     4 = request has finished processing and the response is ready
             */
 
-            const jsonResponse = JSON.stringify(xhr.responseText); //Two main functions, parse and stringify
+            const jsonResponse = JSON.parse(xhr.responseText); //Two main functions, parse and stringify
                                                                 //Get from a server, parse
                                                                 //Send to a server, stringify
             expression(jsonResponse);  
@@ -43,6 +43,7 @@ function ajaxGetRequest(url, expression, method = "get"){ //having method makes 
 
 function renderTable(reimbursements){
     for (const reimbursement of reimbursements){
+        console.log(reimbursement);
         const tr = document.createElement('tr');
         const typeTd = document.createElement('td');
         const amountTd = document.createElement('td');
@@ -53,18 +54,19 @@ function renderTable(reimbursements){
         const resTd = document.createElement('td');
         const edTd = document.createElement('td');
         const edBt = document.createElement('input')
-        typeTd.innerText = reimbursement.type.type;
+        typeTd.innerText = reimbursement.type;
         amountTd.innerText = reimbursement.amount;
-        authorTd.innerText = reimbursement.author.username;
+        authorTd.innerText = reimbursement.author;
         submitTd.innerText = reimbursement.submitDate;
         descTd.innerText = reimbursement.description;
-        statTd.innerText = reimbursement.status.status;
+        statTd.innerText = reimbursement.status;
         resTd.innerText = reimbursement.resolveDate;
 
         edBt.value = reimbursement.reimbursementId;
-        edBt.setAttribute(type,submit);
+        edBt.setAttribute('type','submit');
+        edBt.setAttribute('name','edit'+reimbursement.reimbursementId);
 
-        if(reimbursement.status.status == "submitted"){
+        if(reimbursement.status == "submitted"){
             edBt.disabled = false;
         } else{
             edBt.disabled = true;
@@ -81,26 +83,30 @@ function renderTable(reimbursements){
         tr.append(resTd);
         tr.append(edTd);
         document.getElementById('reimbTableBody').append(tr);
+
+        
+    }
+    const buttons = document.getElementsByTagName('input');
+    for(const button of buttons){
+        button.addEventListener('mousedown', () => button.setAttribute('name','reimbSel'));
     }
 }
 
-// ajaxGetRequest(
-//     "http://localhost:8081/Project1-1.0.0/html/table.json",renderTable,'get'
-// );
+ ajaxGetRequest(
+     "http://localhost:8081/Project1-1.0.0/table.json",renderTable,'get'
+ );
 
 // asyncFetch(
 //     "http://18.216.107.51:8081/Project1-1.0.0/html/table.json",renderTable
 // )
 
-const x = fetch('http://18.216.107.51:8081/Project1-1.0.0/table.json', {
-      //body: JSON.parse(),
-      method: 'post',
-     mode: "no-cors",
-     headers:{
-         origin: 'localhost'
-     } 
-  })
-  .then((r)=>r.json())
-  .then((reimbursements) => console.log(reimbursements),renderTable(reimbursements));
-
-console.log("aaa"+reimbursements.data);
+// fetch('http://localhost:8080/Project1/table.json', {
+//       //body: JSON.parse(),
+//       method: 'post',
+//      mode: "no-cors",
+//      headers:{
+//          origin: 'localhost'
+//      } 
+//   })
+//   .then((r)=>r.json())
+//   .then((reimbursements) => console.log(reimbursements),renderTable(reimbursements));

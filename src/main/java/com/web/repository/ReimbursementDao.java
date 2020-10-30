@@ -213,6 +213,24 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 		return statuses;
 	}
 	
+	public ReimbursementStatus findStatusById(Integer i) {
+		ReimbursementStatus status = null;
+		try(Connection conn = ci.getConnection()){
+			String sql = "select * from ers_reimbursement_status where reimb_status_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, i);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				status = new ReimbursementStatus(rs.getInt(1),rs.getString(2));
+			}
+		} catch (SQLException e) {
+			logger.info("Failed to find one reimbursement status " +e);
+			return status;
+		}
+		logger.info("Selected one reimbursement status");
+		return status;
+	}
+	
 	public List<ReimbursementType> findAllTypes(){
 		List<ReimbursementType> types = new ArrayList<>();
 		try (Connection conn = ci.getConnection()){
@@ -233,6 +251,24 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 		}
 		logger.info("Selected all reimbursement types");
 		return types;
+	}
+	
+	public ReimbursementType findTypeById(Integer i) {
+		ReimbursementType type = null;
+		try(Connection conn = ci.getConnection()){
+			String sql = "select * from ers_reimbursement_type where reimb_type_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, i);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				type = new ReimbursementType(rs.getInt(1),rs.getString(2));
+			}
+		} catch (SQLException e) {
+			logger.info("Failed to find one reimbursement type " +e);
+			return type;
+		}
+		logger.info("Selected one reimbursement type");
+		return type;
 	}
 	
 	public boolean createType(String newType) {

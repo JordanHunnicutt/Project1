@@ -4,4 +4,13 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+    <servlet>
+    <servlet-name>info</servlet-name>
+    <servlet-class>com.web.servlet.InfoServlet
+      </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>info</servlet-name>
+    <url-pattern>*.json</url-pattern>
+  </servlet-mapping>
 </web-app>
