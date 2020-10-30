@@ -122,9 +122,7 @@ public class ReimbursementController {
 		
 		r.setResolverId(sc.getSessionUser(req).getUserId());
 		
-		int updated = rs.editReimbursementService(r);
-		
-		if(updated == 0) {
+		if(rs.editReimbursementService(r) == 0) {
 			logger.info("Failed to update reimbursement");
 		}
 		
