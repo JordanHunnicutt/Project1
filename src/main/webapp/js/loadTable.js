@@ -33,6 +33,14 @@ function ajaxGetRequest(url, expression, method = "get"){ //having method makes 
     xhr.send(); //sends the request
 }
 
+async function asyncFetch(url, expression){ //async introduces asynchronous functions to javascript. by default, js is synchronous
+    const response = await fetch(url);      //await tells js to wait for something to come back, and resolve the promise, assigning response to a variable
+    const json = await response.json();
+    expression(json);
+    //this is not a function you want to use a return keyword on
+    //async and await do not make for return functions
+}
+
 function renderTable(reimbursements){
     for (const reimbursement of reimbursements){
         const tr = document.createElement('tr');
@@ -76,6 +84,10 @@ function renderTable(reimbursements){
     }
 }
 
-ajaxGetRequest(
-    "http://localhost:8081/Project1-1.0.0/html/table.json",renderTable,'get'
+// ajaxGetRequest(
+//     "http://localhost:8081/Project1-1.0.0/html/table.json",renderTable,'get'
+// );
+
+asyncFetch(
+    "http://localhost:8081/Project1-1.0.0/html/table.json",renderTable
 )
