@@ -35,13 +35,15 @@
                     <p class="card-text">Submit a new reimbursement request here.</p>
                 </div>
             </div>
-            <div class="card">
+            <form action="table.page" method="post" id="tableForm">
+            <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" name="tableType" value="user" onclick="document.getElementById('tableForm').submit()">
                 <img src="../images/1-filing-cabinet-drawer-open-tax-allan-swart.jpg" class="card-img-top" style="max-height:167px; width:auto;" alt="File cabinet image">
                 <div class="card-body">
                     <h5 class="card-title">Past/Pending Requests</h5>
                     <p class="card-text">View all of the reimbursement requests you have submmitted here.</p>
                 </div>
-            </div>
+            </a></div>
+            </form>
             <!--
             <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" href="empNotifications.html">
                 <img src="../images/mail-logo.png" class="card-img-top" style="max-height:167px; max-width:167px; align-self:center;" alt="Zoho mail icon">

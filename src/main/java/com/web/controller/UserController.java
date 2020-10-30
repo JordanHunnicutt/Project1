@@ -13,11 +13,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.config.SessionController;
 import com.web.models.Reimbursement;
 import com.web.models.User;
+import com.web.service.ReimbursementService;
 import com.web.service.UserService;
 
 public class UserController {
 
 	private static final UserService us = new UserService();
+	private static final ReimbursementService rs = new ReimbursementService();
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 	private static SessionController sc = new SessionController();
 	
@@ -49,25 +51,44 @@ public class UserController {
 	
 	public void userReimbursementController(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("type/json");
-//		switch(req.getParameter("tableType")) {
-//			case "allPending":
-//				System.out.println("allPending");
-//				return;
-//			default:
-//				System.out.println("parameter not found");
-//		}
-		
-		
-		
-		User u = sc.getSessionUser(req);
-		List<Reimbursement> reimbursements = us.userReimbursementService(u.getUserId());
-		
-		
-		try {
-			res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements));
-		} catch (IOException e){
-			
+		switch(req.getParameter("tableType")) {
+			case "allPending":
+				//give all of the pending requests
+				List<Reimbursement> reimbursements = rs.getPendingReimbursements();
+				try {
+					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements));
+				} catch (IOException e){
+					
+				}
+				return;
+			case "user":
+				//give a single user's requests
+				User u = sc.getSessionUser(req);
+				List<Reimbursement> reimbursements2 = us.userReimbursementService(u.getUserId());
+				
+				try {
+					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements2));
+				} catch (IOException e){
+					
+				}
+				return;
+			case "every":
+				//give all of the requests
+				List<Reimbursement> reimbursements3 = rs.getAllReimbursements();
+				try {
+					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursements3));
+				} catch (IOException e){
+					
+				}
+				return;
+			default:
+				logger.info("No request parameter found");
+				return;
 		}
+		
+		
+		
+		
 
 	}
 	

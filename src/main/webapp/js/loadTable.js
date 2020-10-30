@@ -75,7 +75,7 @@ function renderTable(reimbursements){
         document.getElementById('reimbTableBody').append(tr);
     }
 }
-//renderTable(mockedMonsters);
+
 ajaxGetRequest(
-    "http://localhost:8080/SpookyScarySkeletonsAndFriends/all.json",renderTable,'get'
+    "http://localhost:8081/Project1-1.0.0/html/table.json",renderTable,'get'
 )

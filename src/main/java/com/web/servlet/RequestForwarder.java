@@ -33,7 +33,9 @@ public class RequestForwarder {
 	public void info(HttpServletRequest req, HttpServletResponse resp) {
 		switch(req.getRequestURI()) {
 		case "/Project1-1.0.0/html/table.json":
-			return;// new UserController().userReimbursementController(req, resp);
+			UserController uc = new UserController();
+			uc.userReimbursementController(req, resp);
+			return;
 		}
 	}
 	
