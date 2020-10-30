@@ -89,5 +89,5 @@ function renderTable(reimbursements){
 // );
 
 asyncFetch(
-    "http://localhost:8081/Project1-1.0.0/html/table.json",renderTable
+    "http://18.216.107.51:8081/Project1-1.0.0/html/table.json",renderTable
 )
