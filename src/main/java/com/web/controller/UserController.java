@@ -28,7 +28,6 @@ public class UserController {
 	//return the url to send to, also add user to session
 	//need to make a test for this
 	public String loginUserController(String name, String password, HttpServletRequest req) {
-		String retStr = "";
 		User u = us.loginService(name, password);
 		
 		try {
@@ -74,7 +73,6 @@ public class UserController {
 					reimbursementsBuilt.add(new ReimbursementBuilt(r));
 				}				
 				try {
-					System.out.println(reimbursements);
 					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursementsBuilt));
 				} catch (IOException e){
 					return false;
