@@ -49,6 +49,16 @@ public class UserController {
 	
 	public void userReimbursementController(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("type/json");
+//		switch(req.getParameter("tableType")) {
+//			case "allPending":
+//				System.out.println("allPending");
+//				return;
+//			default:
+//				System.out.println("parameter not found");
+//		}
+		
+		
+		
 		User u = sc.getSessionUser(req);
 		List<Reimbursement> reimbursements = us.userReimbursementService(u.getUserId());
 		

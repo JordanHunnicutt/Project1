@@ -26,19 +26,13 @@ public class RequestForwarder {
 		case "/Project1-1.0.0/html/logout.page":
 			return "index.html";
 		default:
-			try {
-				resp.sendRedirect("/Project1-1.0.0/html/index.html");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			return "index.html";
 		}
 	}
 	
 	public void info(HttpServletRequest req, HttpServletResponse resp) {
 		switch(req.getRequestURI()) {
-		case "/Project1-1.0.0/html/tab1.json":
+		case "/Project1-1.0.0/html/table.json":
 			return;// new UserController().userReimbursementController(req, resp);
 		}
 	}

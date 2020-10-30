@@ -1,13 +1,14 @@
 package com.web.models;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class ReimbursementBuilt {
 
 	private int reimbursementId;
 	private double amount;
-	private Timestamp submitDate;
-	private Timestamp resolveDate;
+	private String submitDate;
+	private String resolveDate;
 	private String description;
 	private byte[] receipt;
 	private UserBuilt author;
@@ -27,16 +28,16 @@ public class ReimbursementBuilt {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public Timestamp getSubmitDate() {
+	public String getSubmitDate() {
 		return submitDate;
 	}
-	public void setSubmitDate(Timestamp submitDate) {
+	public void setSubmitDate(String submitDate) {
 		this.submitDate = submitDate;
 	}
-	public Timestamp getResolveDate() {
+	public String getResolveDate() {
 		return resolveDate;
 	}
-	public void setResolveDate(Timestamp resolveDate) {
+	public void setResolveDate(String resolveDate) {
 		this.resolveDate = resolveDate;
 	}
 	public String getDescription() {
@@ -76,7 +77,7 @@ public class ReimbursementBuilt {
 		this.type = type;
 	}
 	
-	public ReimbursementBuilt(int reimbursementId, double amount, Timestamp submitDate, Timestamp resolveDate,
+	public ReimbursementBuilt(int reimbursementId, double amount, String submitDate, String resolveDate,
 			String description, byte[] receipt, UserBuilt author, UserBuilt resolver, ReimbursementStatus status,
 			ReimbursementType type) {
 		super();
@@ -92,7 +93,7 @@ public class ReimbursementBuilt {
 		this.type = type;
 	}
 	
-	public ReimbursementBuilt(double amount, Timestamp submitDate, Timestamp resolveDate, String description,
+	public ReimbursementBuilt(double amount, String submitDate, String resolveDate, String description,
 			byte[] receipt, UserBuilt author, UserBuilt resolver, ReimbursementStatus status, ReimbursementType type) {
 		super();
 		this.amount = amount;

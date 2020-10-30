@@ -28,13 +28,15 @@
             <p>Please select an option:</p>
         </div>
         <div class="card-deck animate__animated animate__fadeInUp">
-            <div class="card">
+            <form action="table.page" method="post" id="tableForm">
+            <div class="card"><a class="text-decoration-none text-reset" style="align-self: center;" name="tableType" value="allPending" onclick="document.getElementById('tableForm').submit()">
                 <img src="../images/plusInCircle.png" class="card-img-top" style="max-height:167px; max-width:167px; align-self:center;" alt="A new item icon">
                 <div class="card-body">
                     <h5 class="card-title">Pending Requests</h5>
                     <p class="card-text">View all of the pending reimbursement requests here.</p>
                 </div>
-            </div>
+            </a>/div>
+            </form>
             <div class="card">
                 <img src="../images/1-filing-cabinet-drawer-open-tax-allan-swart.jpg" class="card-img-top" style="max-height:167px; width:auto;" alt="File cabinet image">
                 <div class="card-body">
