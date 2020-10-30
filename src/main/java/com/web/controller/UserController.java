@@ -51,7 +51,9 @@ public class UserController {
 	
 	public void userReimbursementController(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("type/json");
-		switch(req.getParameter("tableType")) {
+		String type = sc.getSessionTable(req);
+		
+		switch(type) {
 			case "allPending":
 				//give all of the pending requests
 				List<Reimbursement> reimbursements = rs.getPendingReimbursements();
@@ -88,7 +90,8 @@ public class UserController {
 				try {
 					res.getWriter().println(new ObjectMapper().writeValueAsString(r));
 				} catch (IOException e) {
-				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 				}
 				return;
 		}

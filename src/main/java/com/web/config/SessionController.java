@@ -20,4 +20,13 @@ public class SessionController {
 		req.getSession().invalidate();
 	}
 	
+	public void setSessionTable(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String tType = req.getParameter("tableType");
+		session.setAttribute("tableType", tType);
+	}
+	
+	public String getSessionTable(HttpServletRequest req) {
+		return (String)req.getSession().getAttribute("tableType");
+	}
 }

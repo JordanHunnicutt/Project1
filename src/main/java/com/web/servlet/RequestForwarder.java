@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.web.config.SessionController;
 import com.web.controller.UserController;
 import com.web.models.Reimbursement;
 
 public class RequestForwarder {
 
+	private static SessionController sc = new SessionController();
+	
 	public String traffic(HttpServletRequest req, HttpServletResponse resp){
 		switch(req.getRequestURI()) {
 		case "/Project1-1.0.0/html/home.page":
@@ -18,6 +21,7 @@ public class RequestForwarder {
 			//System.out.println(req.getParameter("pwText"));
 			return new UserController().loginUserController(req.getParameter("userText"), req.getParameter("pwText"), req);
 		case "/Project1-1.0.0/html/table.page":
+			sc.setSessionTable(req);
 			return "reimbTable.html";
 //		case "/Project1-1.0.0/html/guide.page":
 //			return UserController().guidelineCheck(req);
