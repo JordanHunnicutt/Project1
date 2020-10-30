@@ -83,6 +83,13 @@ public class UserController {
 				return;
 			default:
 				logger.info("No request parameter found");
+				Reimbursement r = new Reimbursement();
+				r.setDescription("Didn't get a parameter");
+				try {
+					res.getWriter().println(new ObjectMapper().writeValueAsString(r));
+				} catch (IOException e) {
+				
+				}
 				return;
 		}
 		
