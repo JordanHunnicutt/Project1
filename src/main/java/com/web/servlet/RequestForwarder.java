@@ -30,6 +30,7 @@ public class RequestForwarder {
 		case "/Project1-1.0.0/html/edit.page":
 			return "editReimb.html";
 		case "/Project1-1.0.0/html/logout.page":
+			sc.invalidate(req);
 			return "index.html";
 		default:
 			return "index.html";

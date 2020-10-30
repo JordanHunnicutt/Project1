@@ -17,7 +17,7 @@ function ajaxGetRequest(url, expression, method = "get"){ //having method makes 
                     4 = request has finished processing and the response is ready
             */
 
-            const jsonResponse = JSON.parse(xhr.responseText); //Two main functions, parse and stringify
+            const jsonResponse = JSON.stringify(xhr.responseText); //Two main functions, parse and stringify
                                                                 //Get from a server, parse
                                                                 //Send to a server, stringify
             expression(jsonResponse);  
