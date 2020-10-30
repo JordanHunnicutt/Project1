@@ -73,7 +73,7 @@
 				<version>0.8.1</version>
 				<configuration>
 				<excludes>
-					<exclude>com/web/models</exclude>
+					<exclude>**/com/web/models</exclude>
 				</excludes>				
 				</configuration>
 				<executions>
