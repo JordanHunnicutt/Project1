@@ -2,6 +2,7 @@ package com.web.repository;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.web.models.User;
@@ -9,6 +10,14 @@ import com.web.models.User;
 public class UserDaoTest {
 
 	private static final UserDao ud = new UserDao();
+	private User u = new User();
+	
+	@Before
+	public void setup() {
+		u.setUsername("test");
+		u.setPassword("testPass");
+		u.setRoleId(2);
+	}
 	
 	@Test
 	public void findAllTest() {
@@ -37,7 +46,7 @@ public class UserDaoTest {
 	
 	@Test
 	public void createUserTest() {
-		assertNotNull(ud.create(null));
+		assertNotNull(ud.create(u));
 	}
 	
 	@Test
@@ -49,7 +58,8 @@ public class UserDaoTest {
 	
 	@Test
 	public void deleteUserTest() {
-		assertNotNull(ud.delete(null));
+		u.setUserId(ud.findByName(u.getUsername()).getUserId());
+		assertNotNull(ud.delete(u.getUserId()));
 	}
 	
 }
