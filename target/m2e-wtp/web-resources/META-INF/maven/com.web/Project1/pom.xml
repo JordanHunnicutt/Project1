@@ -71,6 +71,9 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.1</version>
+				<configuration>
+				<exclude>com.web.models</exclude>
+				</configuration>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -96,7 +99,6 @@
 							<dataFile>target/jacoco.exec</dataFile>
 							<!-- Sets the output directory for the code coverage report. -->
 							<outputDirectory>target/my-reports</outputDirectory>
-							<exclude>com.web.models</exclude>
 						</configuration>
 					</execution>
 				</executions>
