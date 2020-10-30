@@ -50,7 +50,7 @@ public class UserController {
 	}
 	
 	public void userReimbursementController(HttpServletRequest req, HttpServletResponse res) {
-		res.setContentType("type/json");
+		res.setContentType("text/json");
 		String type = sc.getSessionTable(req);
 		
 		switch(type) {
