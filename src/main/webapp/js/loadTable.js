@@ -93,7 +93,7 @@ function renderTable(reimbursements){
 // )
 
 fetch('http://18.216.107.51:8081/Project1-1.0.0/html/table.json', {
-      body: JSON.stringify(),
+      body: JSON.parse(),
       method: 'post',
      mode: "no-cors",
      headers:{
