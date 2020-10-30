@@ -24,40 +24,70 @@ public class ReimbursementController {
 	private static SessionController sc = new SessionController();
 	private static final Logger logger = LogManager.getLogger(ReimbursementController.class);
 	
-	public void getTypesController(HttpServletResponse res) {
-		res.setContentType("text/json");
+	public boolean getTypesController(HttpServletResponse res) {
+		
+		try {
+			res.setContentType("text/json");
+		} catch(NullPointerException e) {
+			return false;
+		}
+		
 		
 		List<ReimbursementType> types = rs.getTypesService();
 		
 		try {
 			res.getWriter().println(new ObjectMapper().writeValueAsString(types));
 		} catch (IOException e) {
-			
+			return false;
 		}
+		
+		return true;
 		
 	}
 	
-	public void getStatusesController(HttpServletRequest req, HttpServletResponse res) {
-		res.setContentType("text/json");
+	public boolean getStatusesController(HttpServletRequest req, HttpServletResponse res) {
 		
+		try {
+			res.setContentType("text/json");
+		} catch (NullPointerException e) {
+			return false;
+		}
+				
 		List<ReimbursementStatus> statuses = rs.getStatusesService(req);
 		
 		try {
 			res.getWriter().println(new ObjectMapper().writeValueAsString(statuses));
 		} catch (IOException e) {
-			
+			return false;
 		}
+		return true;
 	}
 	
-	public void getReimbursementIdControllerE(HttpServletRequest req) {
-		int i = Integer.parseInt(req.getParameter("reimbSel"));
+	public boolean getReimbursementIdControllerE(HttpServletRequest req) {
+		
+		int i = 2;
+		
+		try {
+			i = Integer.parseInt(req.getParameter("reimbSel"));
+		} catch (NullPointerException e) {
+			return false;
+		}		
 		
 		Reimbursement r = rs.getReimbursementIdService(i);
 		sc.setSessionReimbursement(req, r);
+		return true;
 	}
 	
-	public void updateController(HttpServletRequest req) {
-		int i = sc.getSessionReimbursement(req).getReimbursementId();
+	public boolean updateController(HttpServletRequest req) {
+		
+		int i = 5;
+		
+		try {
+			i = sc.getSessionReimbursement(req).getReimbursementId();
+		} catch (NullPointerException e) {
+			return false;
+		}
+		
 		Reimbursement r = rs.getReimbursementIdService(i);
 		
 		switch(req.getParameter("reimbType")) {
@@ -98,26 +128,31 @@ public class ReimbursementController {
 			logger.info("Failed to update reimbursement");
 		}
 		
-		
+		return true;
 	}
 	
-	public void insertController(HttpServletRequest req) {
+	public boolean insertController(HttpServletRequest req) {
 		Reimbursement r = new Reimbursement();
 		
-		switch(req.getParameter("reimbType")) {
-		case "Lodging":
-			r.setTypeId(1);
-			break;
-		case "Travel":
-			r.setTypeId(2);
-			break;
-		case "Food":
-			r.setTypeId(3);
-			break;
-		case "Other":
-			r.setTypeId(4);
-			break;
+		try {
+			switch(req.getParameter("reimbType")) {
+			case "Lodging":
+				r.setTypeId(1);
+				break;
+			case "Travel":
+				r.setTypeId(2);
+				break;
+			case "Food":
+				r.setTypeId(3);
+				break;
+			case "Other":
+				r.setTypeId(4);
+				break;
+			}
+		} catch (NullPointerException e){
+			return false;
 		}
+		
 		
 		r.setAmount(Double.parseDouble(req.getParameter("amountText")));
 		r.setDescription(req.getParameter("descText"));
@@ -131,7 +166,7 @@ public class ReimbursementController {
 		if(added == 0) {
 			logger.info("Failed to add reimbursement");
 		}
-		
+		return true;
 	}
 	
 }
