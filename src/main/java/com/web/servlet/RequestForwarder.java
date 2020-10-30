@@ -50,10 +50,8 @@ public class RequestForwarder {
 	}
 	
 	public void info(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("in request forwarder");
 		switch(req.getRequestURI()) {
 		case prep+"table.json":
-			System.out.println("in first case");
 			UserController uc = new UserController();
 			uc.userReimbursementController(req, resp);
 			return;
@@ -66,7 +64,6 @@ public class RequestForwarder {
 			rc2.getStatusesController(req, resp);
 			return;
 		default:
-			System.out.println("in request forward default");
 			Reimbursement r = new Reimbursement();
 			r.setDescription("Didn't get the right URI");
 			try {
