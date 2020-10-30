@@ -24,7 +24,6 @@ public class SessionController {
 	public void setSessionTable(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String tType = req.getParameter("tableType");
-		System.out.println(req.getParameter("tableType"));
 		session.setAttribute("tableType", tType);
 	}
 	
