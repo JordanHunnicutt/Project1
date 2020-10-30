@@ -124,10 +124,9 @@ public class UserController {
 	}
 	
 	public String backToHome(HttpServletRequest req) {
-		User u = sc.getSessionUser(req);
-		if(u.getRoleId()==1) {
+		if(sc.getSessionUser(req).getRoleId()==1) {
 			return "empHomePage.html";
-		} else if (u.getRoleId()==2) {
+		} else if (sc.getSessionUser(req).getRoleId()==2) {
 			return "fmHomePage.html";
 		} else {
 			return "index.html";
