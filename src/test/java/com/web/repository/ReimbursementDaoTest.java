@@ -2,6 +2,8 @@ package com.web.repository;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -74,7 +76,15 @@ public class ReimbursementDaoTest {
 	
 	@Test
 	public void deleteRTest() {
-		assertNotNull(rd.delete(null));
+		List<Reimbursement> rs = rd.findAll();
+		int highest = 0;
+		for(Reimbursement reimb : rs) {
+			if(reimb.getReimbursementId() > highest) {
+				highest = reimb.getReimbursementId();
+			}
+		}
+		
+		assertNotNull(rd.delete(highest));
 	}
 	
 	@Test
