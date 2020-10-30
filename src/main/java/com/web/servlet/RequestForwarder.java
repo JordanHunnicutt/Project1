@@ -5,7 +5,9 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.controller.UserController;
+import com.web.models.Reimbursement;
 
 public class RequestForwarder {
 
@@ -35,6 +37,15 @@ public class RequestForwarder {
 		case "/Project1-1.0.0/html/table.json":
 			UserController uc = new UserController();
 			uc.userReimbursementController(req, resp);
+			return;
+		default:
+			Reimbursement r = new Reimbursement();
+			r.setDescription("Didn't get the right URI");
+			try {
+				resp.getWriter().println(new ObjectMapper().writeValueAsString(r));
+			} catch (IOException e) {
+			
+			}
 			return;
 		}
 	}
