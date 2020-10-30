@@ -86,11 +86,16 @@ public class ReimbursementService {
 	
 	public List<ReimbursementStatus> getStatusesService(HttpServletRequest req){
 		
-		User u = sc.getSessionUser(req);
-		if(u.getRoleId()==1) {
-			ReimbursementStatus rStat = rd.findStatusById(1);
-			return Arrays.asList(rStat);
+		try {
+			User u = sc.getSessionUser(req);
+			if(u.getRoleId()==1) {
+				ReimbursementStatus rStat = rd.findStatusById(1);
+				return Arrays.asList(rStat);
+			}
+		} catch (NullPointerException e) {
+			logger.info("No user found to get statuses by");
 		}
+		
 	
 		List<ReimbursementStatus> statuses = rd.findAllStatuses();
 		

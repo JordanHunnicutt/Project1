@@ -52,4 +52,19 @@ public class ReimbursementServiceTest {
 		assertTrue(rs.newReimbType("Foraging"));
 	}
 	
+	@Test
+	public void getTypesTest() {
+		assertNotNull(rs.getTypesService());
+	}
+	
+	@Test
+	public void getStatusesTest() {
+		assertNotNull(rs.getStatusesService(null));
+	}
+	
+	@Test
+	public void getReimbursementIdTest() {
+		assertNotNull(rs.getReimbursementIdService(2));
+	}
+	
 }

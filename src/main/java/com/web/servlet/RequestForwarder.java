@@ -55,7 +55,7 @@ public class RequestForwarder {
 		case prep+"table.json":
 			System.out.println("in first case");
 			UserController uc = new UserController();
-			uc.userReimbursementController(req, resp);
+			boolean b = uc.userReimbursementController(req, resp);
 			return;
 		case prep+"type.json":
 			ReimbursementController rc = new ReimbursementController();

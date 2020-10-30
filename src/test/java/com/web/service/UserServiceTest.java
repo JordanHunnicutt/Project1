@@ -12,12 +12,9 @@ import com.web.repository.UserDao;
 public class UserServiceTest {
 
 	private static final UserService us = new UserService();
-	UserDao udMock;
-	User uMock;
 	
 	@Before
 	public void setup(){
-		uMock = mock(User.class);
 	}
 	
 	@Test

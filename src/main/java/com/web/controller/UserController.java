@@ -51,10 +51,18 @@ public class UserController {
 		
 	}
 	
-	public void userReimbursementController(HttpServletRequest req, HttpServletResponse res) {
-		res.setContentType("text/json");
-		String type = sc.getSessionTable(req);
-		System.out.println(sc.getSessionUser(req));
+	public boolean userReimbursementController(HttpServletRequest req, HttpServletResponse res) {
+		
+		String type = "";
+		
+		try {
+			res.setContentType("text/json");
+			type = sc.getSessionTable(req);
+			System.out.println(sc.getSessionUser(req));
+		} catch(NullPointerException e) {
+			type = "";
+		}
+		
 		
 		
 		switch(type) {
@@ -69,9 +77,9 @@ public class UserController {
 					System.out.println(reimbursements);
 					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursementsBuilt));
 				} catch (IOException e){
-					
+					return false;
 				}
-				return;
+				return true;
 			case "user":
 				//give a single user's requests
 				User u = sc.getSessionUser(req);
@@ -83,9 +91,9 @@ public class UserController {
 				try {
 					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursementsBuilt2));
 				} catch (IOException e){
-					
+					return false;
 				}
-				return;
+				return true;
 			case "every":
 				//give all of the requests
 				List<Reimbursement> reimbursements3 = rs.getAllReimbursements();
@@ -96,9 +104,9 @@ public class UserController {
 				try {
 					res.getWriter().println(new ObjectMapper().writeValueAsString(reimbursementsBuilt3));
 				} catch (IOException e){
-					
+					return false;
 				}
-				return;
+				return true;
 			default:
 				logger.info("No request parameter found");
 				Reimbursement r = new Reimbursement();
@@ -106,10 +114,11 @@ public class UserController {
 				try {
 					res.getWriter().println(new ObjectMapper().writeValueAsString(r));
 				} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+					return false;
+				} catch (NullPointerException e) {
+					return false;
 				}
-				return;
+				return true;
 		}
 		
 		

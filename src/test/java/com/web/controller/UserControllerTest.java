@@ -15,4 +15,9 @@ public class UserControllerTest {
 		assertNotNull(uc.loginUserController(null, null, null));
 	}
 	
+	
+	@Test
+	public void userControllerTest() {
+		assertNotNull(uc.userReimbursementController(null, null));
+	}
 }
