@@ -29,7 +29,7 @@ public class ReimbursementController {
 		try {
 			res.setContentType("text/json");
 		} catch(NullPointerException e) {
-			return false;
+			//return false;
 		}
 		
 		
@@ -38,6 +38,8 @@ public class ReimbursementController {
 		try {
 			res.getWriter().println(new ObjectMapper().writeValueAsString(types));
 		} catch (IOException e) {
+			return false;
+		} catch (NullPointerException e) {
 			return false;
 		}
 		
@@ -70,7 +72,7 @@ public class ReimbursementController {
 		try {
 			i = Integer.parseInt(req.getParameter("reimbSel"));
 		} catch (NullPointerException e) {
-			return false;
+			//return false;
 		}		
 		
 		Reimbursement r = rs.getReimbursementIdService(i);
