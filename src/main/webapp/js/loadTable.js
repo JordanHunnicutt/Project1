@@ -103,4 +103,4 @@ const x = fetch('http://18.216.107.51:8081/Project1-1.0.0/html/table.json', {
   .then((r)=>r.json())
   .then((reimbursements) => renderTable(reimbursements));
 
-console.log("aaa"+x);
+console.log("aaa"+reimbursements.data);
