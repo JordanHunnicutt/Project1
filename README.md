@@ -20,6 +20,7 @@ These are the current features of the application:
 - Finance Managers accept or reject requests
 - Finance Managers can view only pending requests
 - All users can view guidelines for submitting requests  
+  
 These are to-do items for improving the application:
 - Make filtering more dynamic by providing options on the table page
 - Autofill form fields when editing a reimbursement
