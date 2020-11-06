@@ -34,7 +34,7 @@ These are to-do items for improving the application:
 4. Use Maven commands to build your project into a .war file. For more information on Maven, refer to documentation [here.](https://maven.apache.org/guides/index.html)
 5. Deploy your application using a Server Runtime. This project originally ran on an Apache Tomcat server. You can find information on Apache Tomcat [here.](http://tomcat.apache.org/)
 ## Usage
-1. After installing, you can navigate to the site using your server runtime. If you're using Apache Tomcat in your IDE, provided you haven't changed any settings, you can access the site by going to [http://localhost:8080/Project1/html/index.html]() in your browser.
+1. After installing, you can navigate to the site using your server runtime. If you're using Apache Tomcat in your IDE, provided you haven't changed any settings, you can access the site by going to [http://localhost:8080/Project1/html/index.html](http://github.com/JordanHunnicutt/Project1) in your browser.
 2. You can login to the site using credentials provided in your database, and enjoy the features mentioned in the prior Features section.
 3. You can make changes to the front-end by accessing files in src/main/webapp.
 4. You can make changes to the middle and back-end by accessing files in src/main/java.
